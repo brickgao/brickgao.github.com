@@ -1,13 +1,5 @@
----
-layout: default
-title: Brickgao's
----
-
 <ul class="posts">
-		{% for post in site.posts %}
+{% for post in category_posts %}
 		<li><p class="date" cate="{{ post.categories }}">{{ post.date | date:"%Y-%m-%d" }}</p> <a href="{{ post.url }}">{{ post.title }}</a></li>
-		{% endfor %}
+{% endfor %} 
 </ul>
-
-</div>
-<!--<p style="border-top:1px solid #bbb; margin:20px -20px"></p>-->

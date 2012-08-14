@@ -1,0 +1,27 @@
+---
+layout: nil
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ 
+ <title>Brickgao's</title>
+ <link href="http://brickgao.in/atom.xml" rel="self"/>
+ <link href="http://brickgao.in/"/>
+ <updated>{{ site.time | date_to_xmlschema }}</updated>
+ <id>http://brickgao.in/</id>
+ <author>
+   <name>brickgao</name>
+   <email>brickgao@gmail.com</email>
+ </author>
+
+ {% for post in site.posts limit:20 %}
+ <entry>
+   <title>{{ post.title }}</title>
+   <link href="http://brickgao.in{{ post.url }}"/>
+   <updated>{{ post.date | date_to_xmlschema }}</updated>
+   <id>http://brickgao.in{{ post.id }}</id>
+   <content type="html">{{ post.content | xml_escape }}</content>
+ </entry>
+ {% endfor %}
+ 
+</feed>

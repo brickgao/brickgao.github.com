@@ -1,0 +1,5 @@
+title: Brickgao's
+markdown: rdiscount
+pygments: true
+server: true
+auto: true
