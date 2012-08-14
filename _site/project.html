@@ -28,9 +28,13 @@
 						<li>
 							<a href="/">ARTICLES</a>
 							<ul>
-								{% for category in site.categories %}
-								<li><a href="/{{ category[0]  }}.html"> {{ category[0]  }}</a></li>
-								{% endfor %}
+								
+								<li><a href="/life.html"> life</a></li>
+								
+								<li><a href="/data.html"> data</a></li>
+								
+								<li><a href="/movie.html"> movie</a></li>
+								
 							</ul>
 						</li>
 						<li><a href="/blogroll.html">BLOGROLL</a></li>
@@ -43,8 +47,15 @@
 				</div>
 				
 				<div id="main">
-					<h1>CATEGORY > {{ page.title }}</h1>
-					{{ content }}
+					<h1>CATEGORY > PROJECT</h1>
+					
+<ul class="posts">
+ 
+</ul>
+
+
+</div>
+
 				</div>
 
 				<div id="footer">
