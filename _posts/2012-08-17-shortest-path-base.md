@@ -4,7 +4,9 @@ title: poj-基本最短路问题
 category: tech
 tags: [Shortest path problem, Graph theory]
 ---
-###poj 1062
+
+### poj 1062
+
 中文题，dijkstra基本运用
 
 {% highlight cpp %}
@@ -79,7 +81,8 @@ int main()
 }
 {% endhighlight %}
 
-###poj 1125
+### poj 1125
+
 SPFA过的，如果Floyed写的简单一些
 
 {% highlight cpp %}
@@ -190,7 +193,8 @@ int main()
 }
 {% endhighlight %}
 
-###poj 1860
+### poj 1860
+
 BellmanFord基本运用
 
 {% highlight cpp %}
@@ -259,7 +263,8 @@ int main()
 }
 {% endhighlight %}
 
-###poj 2240
+### poj 2240
+
 BellmanFord基本运用，注意数据中存在自己成环的情况。
 
 {% highlight cpp %}
@@ -358,7 +363,8 @@ int main()
 }
 {% endhighlight %}
 
-###poj 2253
+### poj 2253
+
 Floyed基本应用，在poj上注意输出格式
 
 {% highlight cpp %}
@@ -415,7 +421,8 @@ int main()
 }
 {% endhighlight %}
 
-###poj 3259
+### poj 3259
+
 BellmanFord基本应用
 
 {% highlight cpp %}
