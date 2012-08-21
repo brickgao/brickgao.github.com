@@ -5,7 +5,7 @@ category: tech
 tags: [Shortest path problem, Graph theory]
 ---
 
-### poj 1062
+### poj 1062 昂贵的聘礼
 
 中文题，dijkstra基本运用
 
@@ -81,7 +81,7 @@ int main()
 }
 {% endhighlight %}
 
-### poj 1125
+### poj 1125 Stockbroker Grapevine
 
 SPFA过的，如果Floyed写的简单一些
 
@@ -193,7 +193,7 @@ int main()
 }
 {% endhighlight %}
 
-### poj 1860
+### poj 1860 Currency Exchange
 
 BellmanFord基本运用
 
@@ -263,7 +263,7 @@ int main()
 }
 {% endhighlight %}
 
-### poj 2240
+### poj 2240 Arbitrage
 
 BellmanFord基本运用，注意数据中存在自己成环的情况。
 
@@ -363,7 +363,7 @@ int main()
 }
 {% endhighlight %}
 
-### poj 2253
+### poj 2253 Frogger
 
 Floyed基本应用，在poj上注意输出格式
 
@@ -421,7 +421,7 @@ int main()
 }
 {% endhighlight %}
 
-### poj 3259
+### poj 3259 Wormholes
 
 BellmanFord基本应用
 
