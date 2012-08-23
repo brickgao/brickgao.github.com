@@ -1,6 +1,6 @@
 ---
 layout: post
-title: poj-基本最短路问题
+title: POJ-基本最短路问题
 category: tech
 tags: [Shortest path problem, Graph theory]
 ---
