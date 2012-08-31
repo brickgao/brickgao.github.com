@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 《The King‘s Speech》 小记
-category: MOVIE
+category: movie
 tags: [The King‘s Speech, film]
 ---
 
