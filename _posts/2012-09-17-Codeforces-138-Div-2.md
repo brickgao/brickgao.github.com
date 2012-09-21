@@ -5,7 +5,7 @@ category: tech
 tags: [Codeforces, div2]
 ---
 
-目前A了三道
+目前A了四道
 
 ###A. Parallelepiped
 
@@ -214,5 +214,105 @@ int main()
 
         }
         return 0;
+}
+{% endhighlight %}
+
+###E. Partial Sums
+
+= =完全没有找出规律...后来看到<a href = "http://blog.csdn.net/ACM_cxlove/">ACM_cxlove的Blog</a>才知道是找规律的...
+
+举例：
+N = 4的时候， 随着K不断增加
+
+a1   a2                    a3                                        a4
+
+a1   a1 + a2          a1 + a2 + a3                    a1 + a2 + a3 + a4
+
+a1   2 * a1 + a2   3 * a1 + 2 * a2 + a3      4 * a1 + 3 * a2 + 2 * a3 + a4
+
+a1   3 * a1 + a2   6 * a1 + 3 * a2 + a3     10 * a1 + 6 * a2 + 3 * a3 + a4
+
+a1   4 * a1 + a2   10 * a1 + 4 * a2 + a3   20 * a1 + 10 * a2 + 4 * a3 + a4
+
+a1   5 * a1 + a2   15 * a1 + 5 * a2 + a3   35 * a1 + 15 * a2 + 5 * a3 + a4
+......
+
+可以得出所有数由C(i + k - 2, i - 1) * ai得到...
+
+inv[i]表示 i 对于 MOD 的逆元
+
+则inv[i] = (- MOD / i * inv[MOD % i]);
+
+这样通过递推O(1)就能求出每一个的逆元
+
+证明这个的正确性
+
+两边同时乘以i
+
+inv[i] * i = i * ( - MOD / i * inv[MOD % i]);   (由逆元性质我们知道，a * inv[a] % MOD = 1)
+
+i*(- MOD / i) == (MOD % i) % MOD      
+
+-(MOD - MOD % i) == (MOD % i) % MOD
+
+这是显然成立的，得证
+
+貌似还有一种方法是快速幂来着，之后再看看。
+
+=w=长姿势了...顺便这两天补补信安数学...
+
+{% highlight cpp %}
+//By Brickgao
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+#include <cmath>
+#include <cstdlib>
+#include <algorithm>
+#include <vector>
+using namespace std;
+typedef long long LL;
+#define mod 1000000007
+#define N 2005
+
+LL inv[N], c[N], a[N], n, k;
+
+LL getc(int n, int m)
+{
+	LL ans = 1;
+	for(int i = 1; i <= m; i++)
+		ans = ((ans * inv[i]) % mod * (n - i + 1) % mod);
+	return ans;
+}	
+
+int main()
+{
+	cin >> n >> k;
+	for(int i = 0; i < n; i++) cin >> a[i];
+	if(k == 0)
+	{
+		cout << a[0];
+		for(int i = 1; i < n; i++)
+			cout << " " << a[i];
+		cout << endl;
+		return 0;
+	}
+	inv[0] = inv[1] = 1;
+	for(int i = 2; i < N; i++)
+		inv[i] = (((- mod / i * inv[mod % i]) % mod) + mod) % mod;
+	for(int i = 0; i < n; i++)
+		c[i] = getc(i + k - 1, i);
+	for(int i = 0; i < n; i++)
+	{
+		LL ans = 0;
+		for(int j = 0; j <= i; j++)
+			ans = (ans + a[j] * c[i - j]) % mod;
+		if(!i)
+			cout << ans;
+		else
+			cout << " " << ans;
+	}
+	cout << endl;
+    return 0;
 }
 {% endhighlight %}
