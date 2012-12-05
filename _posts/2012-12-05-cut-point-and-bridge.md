@@ -13,17 +13,15 @@ tags: [cut point, bridge, point biconnected, edge biconnected]
 
 该算法是R.Tarjan发明的。对图深度优先搜索，定义DFS(u)为u在搜索树（以下简称为树）中被遍历到的次序号。定义Low(u)为u或u的子树中能通过非父子边追溯到的最早的节点，即DFS序号最小的节点。根据定义，则有：
 
+
+{% highlight cpp %}
 Low(u)=Min
-
 {
-
 	DFS(u)
-
-	DFS(v) (u,v)为后向边(返祖边) 等价于 DFS(v)<DFS(u)且v不为u的父亲节点
-	
-	Low(v) (u,v)为树枝边(父子边)
-
+	DFS(v) /*(u,v)为后向边(返祖边) 等价于 DFS(v)<DFS(u)且v不为u的父亲节点*/	
+	Low(v) /*(u,v)为树枝边(父子边)*/
 }
+{% endhighlight %}
 一个顶点u是割点，当且仅当满足(1)或(2)
 
 (1) u为树根，且u有多于一个子树。
