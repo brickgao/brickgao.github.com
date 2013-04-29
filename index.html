@@ -67,6 +67,66 @@
   
   <article class="content">
     <section class="title">
+      <h2><a href="/2013/04/28/hello-jekyll.html">从Wordpress迁移到jekyll</a></h2>
+    </section>
+    <section class="meta">
+    <span class="time">
+      <time datetime="2013-04-28">2013-04-28</time>
+    </span>
+    
+    <span class="tags">
+      
+      <a href="/tags.html#Jekyll" title="Jekyll">#Jekyll</a>
+      
+      <a href="/tags.html#Wordpress" title="Wordpress">#Wordpress</a>
+      
+    </span>
+    
+    </section>
+    <section class="post">
+    <p><a href="\media\files\2013\04\jekyll.jpg" class="fancybox" title=""><img src="\media\files\2013\04\jekyll.jpg" alt="" /></a></p>
+
+<p>到今天为止终于把所有的文章全部迁移到了Jekyll。</p>
+
+<p>jekyll搭建的教程很多，而且也很简单，搭建步骤在此就不再多说了。</p>
+
+<p>之前用过一阵jekyll, 大概是去年暑假到年底，那时候用jekyll是因为自己的虚拟空间到期而且wp主页被黑，后来也是因为jekyll的一些bug，换回了wordpress。</p>
+
+<p>今年年初开始用vim，大概花了很久才习惯了vim的一些键位，而且自己玩了一阵wordpress后，觉得wordpress虽然不错，但是还是太麻烦，与我喜欢的精简风格相悖。</p>
+
+<p>之前用Jekyll写博客的时候，很懂markdown写的文章没有搬运，这次直接方便的移动了过来，剩下的只有处理之前的bug和搬运Wordpress上的文章。</p>
+
+<p>因为自己的wp博客文章不多，所以采用的是手动搬运，如果想用脚本搬运，可以google一下，Wordpress文章的搬运脚本很多，大多功能是基本就是把文章的<code>tag</code>, <code>title</code>, <code>layout</code>添加后, 再把wordpress中<code>code</code>标签转换为<code>highlight</code>标签。</p>
+
+<p>如果你是在win上使用jekyll，你会发现bug很多，之前遇到的不能编译markdown文件的原因之一是文字编码问题，可以在<code>git bash</code>上改变环境变量来解决</p>
+
+<div class="highlight"><pre><code class="sh"><span class="nb">export </span><span class="nv">LC_ALL</span><span class="o">=</span>en_US.UTF-8
+<span class="nb">export </span><span class="nv">LANG</span><span class="o">=</span>en_US.UTF-8
+</code></pre></div>
+
+
+<p>剩下不能编译的问题出现在高亮插件<code>pygments</code>上，如果你的高亮代码中存在<code>a[] = \{\{}, {}, {}, {}\}\</code>(去掉\)这样的语句，都不会被自动转义，目测都会出现无法编译的错误。</p>
+
+<p><code>pygments</code>中的<code>linenos</code>在我的page中也存在问题，这个问题可以通过插件来解决，具体的插件请在我的<code>repo</code>中查看</p>
+
+<p>之后在rss订阅中还存在一个bug，如果你的标题中存在<code>&amp;</code>符号，会导致<code>atom.xml</code>的错误，目前还不知道这个错误是不是普遍发生在jekyll上，待观察。</p>
+
+<p>这次更新更换了一个主题，风格很干净，自己加了一个<code>fancybox</code>插件。</p>
+
+<p>vim + markdown + jeykll + github很灵活，数据方面，数据都在github上托管，随时可以查看历史数据并回滚，文章方面，你可以选择离线写完后，下次push到服务器上，像现在这篇文章就是我在火车上写下的。</p>
+
+<p>之后可能还有换到<code>hexo</code>的计划，折腾是蛮好的，之前在别人的blog上看到一句话：</p>
+
+<pre><code>"任何的改变，都会痛，但是不能因此不去改变“
+</code></pre>
+
+<p>写在这里共勉。</p>
+
+    </section>
+    </article>
+  
+  <article class="content">
+    <section class="title">
       <h2><a href="/2013/03/24/UESTC-1153.html">UESTC-1153 The Queen’s New Necklaces</a></h2>
     </section>
     <section class="meta">
@@ -160,140 +220,6 @@
 <span class="lineno">62</span>         <span class="o">}</span>
 <span class="lineno">63</span>     <span class="o">}</span>
 <span class="lineno">64</span> <span class="o">}</span>
-</code></pre></div>
-
-
-
-
-    </section>
-    </article>
-  
-  <article class="content">
-    <section class="title">
-      <h2><a href="/2013/03/24/POJ-2145.html">POJ-2145 Color</a></h2>
-    </section>
-    <section class="meta">
-    <span class="time">
-      <time datetime="2013-03-24">2013-03-24</time>
-    </span>
-    
-    <span class="tags">
-      
-      <a href="/tags.html#POJ" title="POJ">#POJ</a>
-      
-      <a href="/tags.html#Burnside引理" title="Burnside引理">#Burnside引理</a>
-      
-      <a href="/tags.html#Pólya定理" title="Pólya定理">#Pólya定理</a>
-      
-      <a href="/tags.html#欧拉函数" title="欧拉函数">#欧拉函数</a>
-      
-      <a href="/tags.html#置换群" title="置换群">#置换群</a>
-      
-    </span>
-    
-    </section>
-    <section class="post">
-    <p>置换群，burnside引理的题目。</p>
-
-<p>这道题代表了一类题目的优化</p>
-
-<p>裸的算法是 ∑n<sup>gcd(n,i)</sup> 1&lt;i&lt;=n</p>
-
-<p>复杂度过高，进行优化。</p>
-
-<p>置换群种循环的个数L = n / gcd(n, i)</p>
-
-<p>因为如果L | n, 则有n / L | n</p>
-
-<p>则环的长度L的范围是1 ~ sqrt(L)</p>
-
-<p>令a = gcd(n, i), 设i = at</p>
-
-<p>则只有i与t互质的时候，gcd(i, t) = a</p>
-
-<p>则最后可以优化为 ∑(Φ(i) * n ^ (i)) % p</p>
-
-<h3>Code</h3>
-
-<div class="highlight"><pre><code class="cpp"><span class="lineno"> 1</span> <span class="c1">//By Brickgao</span>
-<span class="lineno"> 2</span> <span class="cp">#include &lt;iostream&gt;</span>
-<span class="lineno"> 3</span> <span class="cp">#include &lt;cstdio&gt;</span>
-<span class="lineno"> 4</span> <span class="cp">#include &lt;cstring&gt;</span>
-<span class="lineno"> 5</span> <span class="cp">#include &lt;cmath&gt;</span>
-<span class="lineno"> 6</span> <span class="cp">#include &lt;cstdlib&gt;</span>
-<span class="lineno"> 7</span> <span class="cp">#include &lt;algorithm&gt;</span>
-<span class="lineno"> 8</span> <span class="cp">#include &lt;vector&gt;</span>
-<span class="lineno"> 9</span> <span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-<span class="lineno">10</span> <span class="cp">#define out(v) cerr &lt;&lt; #v &lt;&lt; &quot;: &quot; &lt;&lt; (v) &lt;&lt; endl</span>
-<span class="lineno">11</span> <span class="cp">#define SZ(v) ((int)(v).size())</span>
-<span class="lineno">12</span> <span class="cp">#define LL long long</span>
-<span class="lineno">13</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">maxint</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1u</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">;</span>
-<span class="lineno">14</span> <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span> <span class="kt">bool</span> <span class="n">get_max</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span><span class="k">return</span> <span class="n">b</span> <span class="o">&gt;</span> <span class="n">a</span><span class="o">?</span> <span class="n">a</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="mi">1</span><span class="o">:</span> <span class="mi">0</span><span class="p">;}</span>
-<span class="lineno">15</span> <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span> <span class="kt">bool</span> <span class="n">get_min</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span><span class="k">return</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="n">a</span><span class="o">?</span> <span class="n">a</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="mi">1</span><span class="o">:</span> <span class="mi">0</span><span class="p">;}</span>
-<span class="lineno">16</span> 
-<span class="lineno">17</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">ans</span><span class="p">;</span>
-<span class="lineno">18</span> <span class="kt">int</span> <span class="n">t</span><span class="p">,</span> <span class="n">num</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">;</span>
-<span class="lineno">19</span> <span class="kt">int</span> <span class="n">isprime</span><span class="p">[</span><span class="mi">50001</span><span class="p">];</span>
-<span class="lineno">20</span> <span class="kt">int</span> <span class="n">prime</span><span class="p">[</span><span class="mi">8001</span><span class="p">];</span>
-<span class="lineno">21</span> 
-<span class="lineno">22</span> <span class="kt">void</span> <span class="n">getprime</span><span class="p">()</span> <span class="p">{</span>
-<span class="lineno">23</span>     <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="lineno">24</span>     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">50000</span><span class="p">;</span> <span class="n">i</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-<span class="lineno">25</span>         <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">isprime</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
-<span class="lineno">26</span>             <span class="n">prime</span><span class="p">[</span><span class="n">num</span> <span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
-<span class="lineno">27</span>             <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">*</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">50000</span><span class="p">;</span> <span class="n">j</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-<span class="lineno">28</span>                 <span class="n">isprime</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-<span class="lineno">29</span>             <span class="p">}</span>
-<span class="lineno">30</span>         <span class="p">}</span>
-<span class="lineno">31</span>     <span class="p">}</span>
-<span class="lineno">32</span> <span class="p">}</span>
-<span class="lineno">33</span> 
-<span class="lineno">34</span> <span class="kt">int</span> <span class="n">euler</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
-<span class="lineno">35</span>     <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
-<span class="lineno">36</span>     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">num</span> <span class="o">&amp;&amp;</span> <span class="n">prime</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">prime</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">x</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-<span class="lineno">37</span>         <span class="k">if</span><span class="p">(</span><span class="n">x</span> <span class="o">%</span> <span class="n">prime</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-<span class="lineno">38</span>             <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="o">/</span> <span class="n">prime</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">prime</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
-<span class="lineno">39</span>             <span class="k">while</span><span class="p">(</span><span class="n">x</span> <span class="o">%</span> <span class="n">prime</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-<span class="lineno">40</span>                 <span class="n">x</span> <span class="o">/=</span> <span class="n">prime</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-<span class="lineno">41</span>             <span class="p">}</span>
-<span class="lineno">42</span>         <span class="p">}</span>
-<span class="lineno">43</span>     <span class="p">}</span>
-<span class="lineno">44</span>     <span class="k">if</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="o">/</span> <span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
-<span class="lineno">45</span>     <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
-<span class="lineno">46</span> <span class="p">}</span>
-<span class="lineno">47</span> 
-<span class="lineno">48</span> <span class="n">LL</span> <span class="n">quickpow</span><span class="p">(</span><span class="n">LL</span> <span class="n">m</span> <span class="p">,</span> <span class="n">LL</span> <span class="n">n</span> <span class="p">,</span> <span class="n">LL</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
-<span class="lineno">49</span>     <span class="n">LL</span> <span class="n">tmp</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> 
-<span class="lineno">50</span>     <span class="n">m</span> <span class="o">%=</span> <span class="n">k</span><span class="p">;</span>
-<span class="lineno">51</span>     <span class="k">while</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span> 
-<span class="lineno">52</span>         <span class="k">if</span><span class="p">(</span><span class="n">n</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span>
-<span class="lineno">53</span>             <span class="n">tmp</span> <span class="o">=</span> <span class="p">(</span><span class="n">tmp</span> <span class="o">*</span> <span class="n">m</span><span class="p">)</span> <span class="o">%</span> <span class="n">k</span><span class="p">;</span> 
-<span class="lineno">54</span>         <span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="n">m</span> <span class="o">*</span> <span class="n">m</span><span class="p">)</span> <span class="o">%</span> <span class="n">k</span><span class="p">;</span>
-<span class="lineno">55</span>         <span class="n">n</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span><span class="p">;</span>
-<span class="lineno">56</span>     <span class="p">}</span> 
-<span class="lineno">57</span>     <span class="k">return</span> <span class="n">tmp</span><span class="p">;</span>
-<span class="lineno">58</span> <span class="p">}</span> 
-<span class="lineno">59</span> 
-<span class="lineno">60</span> <span class="kt">int</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
-<span class="lineno">61</span>     <span class="n">getprime</span><span class="p">();</span>
-<span class="lineno">62</span>     <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">t</span><span class="p">);</span>
-<span class="lineno">63</span>     <span class="k">while</span><span class="p">(</span><span class="n">t</span> <span class="o">--</span><span class="p">)</span> <span class="p">{</span>
-<span class="lineno">64</span>         <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="lineno">65</span>         <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%d%d&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">n</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">p</span><span class="p">);</span>
-<span class="lineno">66</span>         <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">);</span> <span class="n">i</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-<span class="lineno">67</span>             <span class="k">if</span><span class="p">(</span><span class="n">n</span> <span class="o">%</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-<span class="lineno">68</span>                 <span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">ans</span> <span class="o">+</span> <span class="n">euler</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">%</span> <span class="n">p</span> <span class="o">*</span> <span class="n">quickpow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span> <span class="o">/</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="o">+</span> <span class="n">euler</span><span class="p">(</span><span class="n">n</span> <span class="o">/</span> <span class="n">i</span><span class="p">)</span> <span class="o">%</span> <span class="n">p</span> <span class="o">*</span> <span class="n">quickpow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span> <span class="o">%</span> <span class="n">p</span><span class="p">;</span>
-<span class="lineno">69</span>                 <span class="c1">//cout &lt;&lt; quickpow(n,n-1,p) &lt;&lt; &quot; &quot; &lt;&lt; quickpow(n, n / i - 1, p) &lt;&lt; &quot; &quot; &lt;&lt; euler(i) &lt;&lt; &quot; &quot; &lt;&lt; euler(n / i) &lt;&lt; endl;</span>
-<span class="lineno">70</span>             <span class="p">}</span>
-<span class="lineno">71</span>         <span class="p">}</span>
-<span class="lineno">72</span>         <span class="k">if</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
-<span class="lineno">73</span>             <span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">ans</span> <span class="o">+</span> <span class="n">quickpow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">euler</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="o">%</span> <span class="n">p</span><span class="p">))</span> <span class="o">%</span> <span class="n">p</span><span class="p">;</span>
-<span class="lineno">74</span>         <span class="p">}</span>
-<span class="lineno">75</span>         <span class="n">ans</span> <span class="o">%=</span> <span class="n">p</span><span class="p">;</span>
-<span class="lineno">76</span>         <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ans</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-<span class="lineno">77</span>     <span class="p">}</span>
-<span class="lineno">78</span>     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="lineno">79</span> <span class="p">}</span>
 </code></pre></div>
 
 
