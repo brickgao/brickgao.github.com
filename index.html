@@ -67,6 +67,57 @@
   
   <article class="content">
     <section class="title">
+      <h2><a href="/2013/05/29/code-my-os-3.html">Orange'S:一个操作系统的实现 读书笔记-3</a></h2>
+    </section>
+    <section class="meta">
+    <span class="time">
+      <time datetime="2013-05-29">2013-05-29</time>
+    </span>
+    
+    <span class="tags">
+      
+      <a href="/tags.html#linux" title="linux">#linux</a>
+      
+      <a href="/tags.html#操作系统" title="操作系统">#操作系统</a>
+      
+      <a href="/tags.html#汇编" title="汇编">#汇编</a>
+      
+    </span>
+    
+    </section>
+    <section class="post">
+    <h3>第四章</h3>
+
+<p>引导扇区为第0个扇区，扇区中有一个重要的数据结构叫BPB<br/>
+其中名称以<code>BPB_</code>开头的属于BPB，名称以<code>BS_</code>开头的不属于BPB<br/>
+通过FAT值来寻找文件簇</p>
+
+<p>loader需要做的事情：<br/>
+*   加载内核入内存<br/>
+*   跳入保护模式</p>
+
+<h3>第五章</h3>
+
+<p>需要加载ELF格式的内核进入内存</p>
+
+<p>NASM的选项<code>-f elf</code>指定输出文件格式为ELF格式<br/>
+连接选项<code>-s</code>可以去掉符号表</p>
+
+<p>跳入保护模式后<br/>
+标号（变量）的物理地址 = BaseOfLoader * 10h + 标号（变量）的偏移</p>
+
+<p>09FC00h ~ 09FFFFh这段内存不能被用做常规使用<br/>
+大多数DOS都不占用0x30000以上的内存地址</p>
+
+<p>终于进入能写C语言的时代。</p>
+
+<p>makefile的编写。</p>
+
+    </section>
+    </article>
+  
+  <article class="content">
+    <section class="title">
       <h2><a href="/2013/05/21/topcoder-srm-579-div-2.html">Topcoder SRM 579 (Div.2)</a></h2>
     </section>
     <section class="meta">
@@ -167,123 +218,6 @@
 
 
 
-
-    </section>
-    </article>
-  
-  <article class="content">
-    <section class="title">
-      <h2><a href="/2013/05/13/http-request-method.html">模拟登陆,提交表单与网页抓取</a></h2>
-    </section>
-    <section class="meta">
-    <span class="time">
-      <time datetime="2013-05-13">2013-05-13</time>
-    </span>
-    
-    <span class="tags">
-      
-      <a href="/tags.html#Python" title="Python">#Python</a>
-      
-      <a href="/tags.html#Request" title="Request">#Request</a>
-      
-      <a href="/tags.html#Http" title="Http">#Http</a>
-      
-      <a href="/tags.html#模拟登录" title="模拟登录">#模拟登录</a>
-      
-      <a href="/tags.html#提交表单" title="提交表单">#提交表单</a>
-      
-      <a href="/tags.html#网页抓取" title="网页抓取">#网页抓取</a>
-      
-    </span>
-    
-    </section>
-    <section class="post">
-    <p>这两天忽然想起来学着写一下网页请求相关的东西，写了几天来总结一下。</p>
-
-<h2>网页请求</h2>
-
-<p>用Python来写对网页请求的话有两种选择</p>
-
-<ul>
-<li>使用<code>urllib2</code>, <code>urllib</code>模块来写</li>
-<li>使用<code>Request</code>模块来写</li>
-</ul>
-
-
-<p>个人比较推荐用第二种方法来写，原因后面再说。</p>
-
-<h3>利用<code>urllib2</code>和<code>urllib</code>来写</h3>
-
-<p>这种方法先要处理<code>Cookies</code>，例如：</p>
-
-<div class="highlight"><pre><code class="python"><span class="n">cookie</span> <span class="o">=</span> <span class="n">cookielib</span><span class="o">.</span><span class="n">CookieJar</span><span class="p">()</span>
-<span class="n">cookies</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">HTTPCookieProcessor</span><span class="p">(</span><span class="n">cookie</span><span class="p">)</span>
-<span class="n">opener</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">build_opener</span><span class="p">(</span><span class="n">cookies</span><span class="p">)</span>
-<span class="n">urllib2</span><span class="o">.</span><span class="n">install_opener</span><span class="p">(</span><span class="n">opener</span><span class="p">)</span>
-</code></pre></div>
-
-
-<p>然后再对网页发出请求，这里以模拟登录从网位例：</p>
-
-<div class="highlight"><pre><code class="python"><span class="n">parms</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s">&#39;email&#39;</span><span class="p">:</span> <span class="n">mail</span><span class="p">,</span>
-        <span class="s">&#39;password&#39;</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span>
-        <span class="s">&#39;domain&#39;</span><span class="p">:</span> <span class="s">&#39;renren.com&#39;</span><span class="p">,</span>
-<span class="p">}</span>
-            
-<span class="n">loginURL</span> <span class="o">=</span> <span class="s">&#39;http://renren.com/PLogin.do&#39;</span>
-<span class="n">login</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">loginURL</span><span class="p">,</span> <span class="n">urllib</span><span class="o">.</span><span class="n">urlencode</span><span class="p">(</span><span class="n">parms</span><span class="p">))</span>
-</code></pre></div>
-
-
-<p>这里的<code>parm</code>是发送的内容，具体每个网页发送的内容你可以用chrome的开发者工具中的Network查看，向哪个网页请求以达到操作也可以在Network中看到。</p>
-
-<h3>利用<code>Request</code>来写</h3>
-
-<p>如果你没有安装Request模块，可以通过<code>esay_install Request</code>来安装，如果没有<code>esay_install</code>，请谷歌一下安装方法。</p>
-
-<p><code>Request</code>模块相对于<code>urllib2</code>, <code>urllib</code>更简单一些，它把大部分的工作做了，不需要用户去考虑太多的问题，这也是我推荐用它的原因。</p>
-
-<p>对于相同的操作，即登录从网，操作是这样的：</p>
-
-<div class="highlight"><pre><code class="python"><span class="n">loginurl</span> <span class="o">=</span> <span class="s">&#39;http://renren.com/PLogin.do&#39;</span>
-<span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s">&#39;email&#39;</span><span class="p">:</span> <span class="n">mail</span><span class="p">,</span>
-    <span class="s">&#39;password&#39;</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span>
-    <span class="s">&#39;domin&#39;</span><span class="p">:</span> <span class="s">&#39;renren.com&#39;</span><span class="p">,</span>
-<span class="p">}</span>
-<span class="n">renren</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">loginurl</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="n">payload</span><span class="p">)</span>
-</code></pre></div>
-
-
-<p>更多的<code>Request</code>的功能你可以从它的<a href="http://docs.python-requests.org/en/latest/">项目页</a>上找到。</p>
-
-<h2>关于抓取网页及处理</h2>
-
-<p>网页抓取基本是和网页请求衔接着的。</p>
-
-<h3>抓取网页</h3>
-
-<p>如果你采用的是<code>urllib</code>和<code>urllib2</code>，网页信息可以通过<code>urllib2.urlopen().read()</code>来读取。</p>
-
-<p>如果你采用的是<code>Request</code>，网页信息可以通过<code>requests.text</code>来读取。</p>
-
-<h3>处理信息</h3>
-
-<p>关于信息的筛选推荐使用<code>pyquery</code>来实现。</p>
-
-<p><code>pyquery</code>的操作基本和<code>jQuery</code>一致，如果你学过<code>jQuery</code>，那简单翻阅一下文档就行了。</p>
-
-<p>比如我这里要筛选<code>class = content-main</code>的部分</p>
-
-<div class="highlight"><pre><code class="python"><span class="n">d</span> <span class="o">=</span> <span class="n">PyQuery</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">(</span><span class="s">&#39;.content-main&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
-</code></pre></div>
-
-
-<p>pyquery的文档请戳<a href="http://pythonhosted.org/pyquery/">这里</a></p>
-
-<p>近期如果开了一个命令行来控制从网的坑，如果有时间的话，应该会最近填上的。</p>
 
     </section>
     </article>

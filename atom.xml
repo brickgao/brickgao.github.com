@@ -4,13 +4,47 @@
  <title>Brickgao's</title>
  <link href="http://brickgao.com/atom.xml" rel="self"/>
  <link href="http://brickgao.com/"/>
- <updated>2013-05-21T15:46:57+08:00</updated>
+ <updated>2013-05-29T23:54:57+08:00</updated>
  <id>http://brickgao.com/</id>
  <author>
    <name>Brickgao</name>
    <email>brickgao@gamil.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Orange'S:一个操作系统的实现 读书笔记-3</title>
+   <link href="http://brickgao.com/2013/05/29/code-my-os-3.html"/>
+   <updated>2013-05-29T00:00:00+08:00</updated>
+   <id>http://brickgao.com/2013/05/29/code-my-os-3</id>
+   <content type="html">&lt;h3&gt;第四章&lt;/h3&gt;
+
+&lt;p&gt;引导扇区为第0个扇区，扇区中有一个重要的数据结构叫BPB&lt;br/&gt;
+其中名称以&lt;code&gt;BPB_&lt;/code&gt;开头的属于BPB，名称以&lt;code&gt;BS_&lt;/code&gt;开头的不属于BPB&lt;br/&gt;
+通过FAT值来寻找文件簇&lt;/p&gt;
+
+&lt;p&gt;loader需要做的事情：&lt;br/&gt;
+*   加载内核入内存&lt;br/&gt;
+*   跳入保护模式&lt;/p&gt;
+
+&lt;h3&gt;第五章&lt;/h3&gt;
+
+&lt;p&gt;需要加载ELF格式的内核进入内存&lt;/p&gt;
+
+&lt;p&gt;NASM的选项&lt;code&gt;-f elf&lt;/code&gt;指定输出文件格式为ELF格式&lt;br/&gt;
+连接选项&lt;code&gt;-s&lt;/code&gt;可以去掉符号表&lt;/p&gt;
+
+&lt;p&gt;跳入保护模式后&lt;br/&gt;
+标号（变量）的物理地址 = BaseOfLoader * 10h + 标号（变量）的偏移&lt;/p&gt;
+
+&lt;p&gt;09FC00h ~ 09FFFFh这段内存不能被用做常规使用&lt;br/&gt;
+大多数DOS都不占用0x30000以上的内存地址&lt;/p&gt;
+
+&lt;p&gt;终于进入能写C语言的时代。&lt;/p&gt;
+
+&lt;p&gt;makefile的编写。&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Topcoder SRM 579 (Div.2)</title>
@@ -708,95 +742,6 @@ EOI：每次中断处理结束 发送一个EOI给8259A，以便继续接受中�
 &lt;h3&gt;POJ-1286 Necklace of Beads&lt;/h3&gt;
 
 &lt;p&gt;比上一题说的还清楚嘞，规定了颜色数，解法同上题。&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Orange'S:一个操作系统的实现 读书笔记-1</title>
-   <link href="http://brickgao.com/2013/03/13/code-my-os-1.html"/>
-   <updated>2013-03-13T00:00:00+08:00</updated>
-   <id>http://brickgao.com/2013/03/13/code-my-os-1</id>
-   <content type="html">&lt;p&gt;因为操作系统实验而接触到的书，大略翻了一下，这本书讲的是从细节方面来实现一个操作系统的编写，区别与一些操作系统概念性质的教材，看起来还是不错的。&lt;/p&gt;
-
-&lt;h3&gt;第一章&lt;/h3&gt;
-
-
-&lt;p&gt;这里有一个简单的引导程序boot.asm，大概是最简单的&quot;操作系统&quot;。&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;nasm&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt;         
-&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt;         &lt;span class=&quot;k&quot;&gt;org&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;07c00h&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt;         &lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cs&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt;         &lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ax&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt;         &lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;es&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ax&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt;         &lt;span class=&quot;nf&quot;&gt;call&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Disp&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Str&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt;         &lt;span class=&quot;nf&quot;&gt;jmp&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;$&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;DispStr:&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt;         &lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;BootMessage&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt;         &lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;bp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ax&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt;         &lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt;         &lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;01301h&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt;         &lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;bx&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;000ch&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;14&lt;/span&gt;         &lt;span class=&quot;nf&quot;&gt;mov&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;dl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;15&lt;/span&gt;         &lt;span class=&quot;nf&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;10h&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;16&lt;/span&gt;         &lt;span class=&quot;nf&quot;&gt;ret&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;17&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;BootMessage:&lt;/span&gt;       &lt;span class=&quot;kd&quot;&gt;db&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Hello, OS world!&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;18&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;times&lt;/span&gt;   &lt;span class=&quot;mi&quot;&gt;510&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;$$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;nv&quot;&gt;db&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;19&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;dw&lt;/span&gt;      &lt;span class=&quot;mh&quot;&gt;0xaa55&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-
-
-&lt;blockquote&gt;上一段程序有几个需要注意的地方：
-
-(1)
-
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;nasm&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt;         &lt;span class=&quot;kd&quot;&gt;times&lt;/span&gt;   &lt;span class=&quot;mi&quot;&gt;510&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;$$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;nv&quot;&gt;db&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-中的$与$$ : $表示当前行汇编后的地址，而$$表示一个结开始处被汇编的地址，故$ - $$可以来表示本行距程序开始处的距离。
-
-(2)
-
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;nasm&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt;         
-&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt;         &lt;span class=&quot;k&quot;&gt;org&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;07c00h&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-是因为操作系统若发现引导扇区，则会跳到地址0000:07c00处，然后讲控制权全部交给这段引导代码。
-
-(3)
-
-可以用预编译宏讲程序编译成com，便于在win上调试。
-
-&lt;/blockquote&gt;
-
-
-&lt;p&gt;编译boot.asm&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;    nasm boot.asm -o boot.bin
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;因为我是用virtualbox来运行操作系统的，所以创造软盘镜像文件boot.img&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;    dd &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; boot.bin &lt;span class=&quot;nv&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; test.img &lt;span class=&quot;nv&quot;&gt;bs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 512 &lt;span class=&quot;nv&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;用虚拟软驱引导就可以看见喜闻乐见的红字“Hello, OS world!”。&lt;/p&gt;
-
-&lt;p&gt;这本书上用的虚拟机软件是bochs，感觉和virtualbox比起来，调试汇编程序会更方便一下，所以最后还是两个都安装了下。&lt;/p&gt;
-
-&lt;h3&gt;第二章&lt;/h3&gt;
-
-
-&lt;p&gt;基本是在讲环境的配置，程序的调试和虚拟机的选择。&lt;/p&gt;
-
-&lt;p&gt;看了两章，感觉汇编语言还是真心重要的，这学期的汇编看来还是要多下点功夫了_(:з」。&lt;/p&gt;
 </content>
  </entry>
  
