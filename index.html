@@ -67,6 +67,99 @@
   
   <article class="content">
     <section class="title">
+      <h2><a href="/2013/05/30/my-first-chrome-extension.html">自己写的第一个Chrome Extension</a></h2>
+    </section>
+    <section class="meta">
+    <span class="time">
+      <time datetime="2013-05-30">2013-05-30</time>
+    </span>
+    
+    <span class="tags">
+      
+      <a href="/tags.html#Chrome Extension" title="Chrome Extension">#Chrome Extension</a>
+      
+      <a href="/tags.html#js" title="js">#js</a>
+      
+      <a href="/tags.html#Twitter" title="Twitter">#Twitter</a>
+      
+    </span>
+    
+    </section>
+    <section class="post">
+    <p>前几天忽然想写个Chrome Extension玩，于是就动手写了。</p>
+
+<p>也没有特别好的想法，于是写了一个Twitter停留计时和提醒的Extension。</p>
+
+<p>现看了看Chrome的官方文档，后来发现有人自己翻译了一下(<a href="https://crxdoc-zh.appspot.com/extensions/getstarted.html">戳我</a>)，翻译的还不错。</p>
+
+<p>Chrome Extension大概的组成元素是:</p>
+
+<ul>
+<li>一个清单文件</li>
+<li>一个或多个 HTML 文件（除非扩展程序是一个主题背景）</li>
+<li>可选：一个或多个 JavaScript 文件</li>
+<li>可选：您的扩展程序需要的任何其他文件，例如图片</li>
+</ul>
+
+
+<p>发现清单列表<code>manifest.json</code>已经发展到了版本二，请务必看下版本二的改动，尤其是安全方面的改动，对于js做了一些限制，比如不能直接内联js等等。</p>
+
+<p>自己写的Extension大概分为两个部分，一个是计时，一个是Time out之后的提醒。</p>
+
+<p>在<code>background.js</code>中的计时部分用了<code>chrome.runtime.onInstalled.addListener</code>在拓展更新的时候来初始化各种变量。</p>
+
+<p>计时模块写个两个函数一个是<code>startTimer()</code>表示启动计时器，另一个<code>endTimer()</code>停止计时器。</p>
+
+<p>计时部分因为对<code>setTimeout("interval();")</code>安全限制，循环改为<code>setTimeout(function() {interval();},1000);</code>。</p>
+
+<p>因为只对当前的页面是不是<code>Twitter.com</code>计时，所以利用以下函数监控<code>Tabs</code>，然后决定是否计时：</p>
+
+<ul>
+<li>function checkByTabid(tabId) {} //Check the tab is twitter or not</li>
+<li>chrome.tabs.onCreated.addListener(function(tab){}) //Check when create new tab</li>
+<li>chrome.tabs.onSelectionChanged.addListener(function(tabId, changeInfo){}) //Check when select tab</li>
+<li>chrome.tabs.onRemoved.addListener(function(tabId){}) //Check when change tab</li>
+<li>chrome.tabs.onUpdated.addListener(function(tabId, changeInfo){}) //Check when update tab</li>
+<li>chrome.windows.onFocusChanged.addListener(function(windowId){}) ////Check when window change</li>
+</ul>
+
+
+<p>不知道为什么参数比较的时候默认成了字符串比较，后来用<code>parseInt</code>函数修改了下。</p>
+
+<p>对于限制时间的设置由HTML5中的<code>localStorage</code>来储存，一开始以为是单个Page拥有独立的<code>localStorage</code>，后来才发现是整个Extension公用，被自己坑了一下。</p>
+
+<p>写桌面通知要在清单中声明可以使用，再对使用的图片声明为可使用的资源，桌面通知大概格式是</p>
+
+<div class="highlight"><pre><code class="js"><span class="kd">function</span> <span class="nx">show</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">notification</span> <span class="o">=</span> <span class="nx">webkitNotifications</span><span class="p">.</span><span class="nx">createNotification</span><span class="p">(</span>
+        <span class="s1">&#39;icon.png&#39;</span><span class="p">,</span>  <span class="c1">// url of icon</span>
+        <span class="s1">&#39;Notice&#39;</span><span class="p">,</span>  <span class="c1">// title of the notice</span>
+        <span class="s1">&#39;Time you used on twitter is over toady &gt;_&lt;&#39;</span>  <span class="c1">// the text of notice</span>
+    <span class="p">);</span>
+    <span class="nx">notification</span><span class="p">.</span><span class="nx">show</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+
+
+<p>写设置不一样的是没法对<code>onclick</code>在<code>button</code>中定义，需要对<code>button</code>的动作监听：</p>
+
+<div class="highlight"><pre><code class="js"><span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;DOMContentLoaded&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;#saveset&#39;</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="nx">save_options</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+
+
+<p>写完发现有个Bug，如果用<code>Gogent</code>来访问Twiiter就会获取<code>tab.url</code>错误，不知道是为什么，之后再研究下。</p>
+
+<p>这次还是新看了不少东西，感觉第一次写Extension，代码风格实在是看不过去。。。</p>
+
+<p>Extension被我扔到Github上了，项目地址<a href="https://github.com/brickgao/twittermaid">https://github.com/brickgao/twittermaid</a></p>
+
+    </section>
+    </article>
+  
+  <article class="content">
+    <section class="title">
       <h2><a href="/2013/05/29/code-my-os-3.html">Orange'S:一个操作系统的实现 读书笔记-3</a></h2>
     </section>
     <section class="meta">
@@ -112,112 +205,6 @@
 <p>终于进入能写C语言的时代。</p>
 
 <p>makefile的编写。</p>
-
-    </section>
-    </article>
-  
-  <article class="content">
-    <section class="title">
-      <h2><a href="/2013/05/21/topcoder-srm-579-div-2.html">Topcoder SRM 579 (Div.2)</a></h2>
-    </section>
-    <section class="meta">
-    <span class="time">
-      <time datetime="2013-05-21">2013-05-21</time>
-    </span>
-    
-    <span class="tags">
-      
-      <a href="/tags.html#Topcoder" title="Topcoder">#Topcoder</a>
-      
-      <a href="/tags.html#DP" title="DP">#DP</a>
-      
-      <a href="/tags.html#DFS" title="DFS">#DFS</a>
-      
-    </span>
-    
-    </section>
-    <section class="post">
-    <h3>250pt</h3>
-
-<p>排序之后做一遍。</p>
-
-<h3>500pt</h3>
-
-<p>暴力匹配就可以。</p>
-
-<h3>1000pt</h3>
-
-<p>暴力dfs，拿dp来求距离。</p>
-
-<div class="highlight"><pre><code class="cpp"><span class="lineno"> 1</span> <span class="cp">#include &lt;cstdio&gt;</span>
-<span class="lineno"> 2</span> <span class="cp">#include &lt;iostream&gt;</span>
-<span class="lineno"> 3</span> <span class="cp">#include &lt;cstring&gt;</span>
-<span class="lineno"> 4</span> <span class="cp">#include &lt;algorithm&gt;</span>
-<span class="lineno"> 5</span> <span class="cp">#include &lt;cmath&gt;</span>
-<span class="lineno"> 6</span> <span class="cp">#include &lt;vector&gt;</span>
-<span class="lineno"> 7</span> <span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span> <span class="p">;</span>
-<span class="lineno"> 8</span> <span class="cp">#define For(i , n) for(int i = 0 ; i &lt; (n) ; ++i)</span>
-<span class="lineno"> 9</span> <span class="cp">#define SZ(x)  (int)((x).size())</span>
-<span class="lineno">10</span> <span class="k">typedef</span> <span class="kt">long</span> <span class="kt">long</span> <span class="n">lint</span> <span class="p">;</span>
-<span class="lineno">11</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">maxint</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1u</span><span class="o">&gt;&gt;</span><span class="mi">2</span> <span class="p">;</span>
-<span class="lineno">12</span> <span class="k">const</span> <span class="kt">double</span> <span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-6</span> <span class="p">;</span> 
-<span class="lineno">13</span> 
-<span class="lineno">14</span> <span class="kt">double</span> <span class="n">map</span><span class="p">[</span><span class="mi">10</span><span class="p">][</span><span class="mi">10</span><span class="p">];</span>
-<span class="lineno">15</span> <span class="kt">double</span> <span class="n">rec</span><span class="p">[</span><span class="mi">300</span><span class="p">];</span>
-<span class="lineno">16</span> <span class="kt">double</span> <span class="n">ans</span><span class="p">;</span>
-<span class="lineno">17</span> <span class="kt">int</span> <span class="n">now</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="lineno">18</span> <span class="kt">int</span> <span class="n">len</span><span class="p">;</span>
-<span class="lineno">19</span> 
-<span class="lineno">20</span> <span class="k">class</span> <span class="nc">MarblePositioning</span>
-<span class="lineno">21</span> <span class="p">{</span>
-<span class="lineno">22</span> <span class="k">public</span><span class="o">:</span>
-<span class="lineno">23</span> <span class="kt">double</span> <span class="n">totalWidth</span><span class="p">(</span><span class="n">vector</span> <span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">radius</span><span class="p">)</span>
-<span class="lineno">24</span> <span class="p">{</span>
-<span class="lineno">25</span>     <span class="n">now</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="lineno">26</span>     <span class="n">ans</span> <span class="o">=</span> <span class="mf">1.79769e+308</span><span class="p">;</span>
-<span class="lineno">27</span>     <span class="n">len</span> <span class="o">=</span> <span class="n">SZ</span><span class="p">(</span><span class="n">radius</span><span class="p">);</span>
-<span class="lineno">28</span>     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span><span class="p">;</span> <span class="n">i</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-<span class="lineno">29</span>         <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">len</span><span class="p">;</span> <span class="n">j</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-<span class="lineno">30</span>             <span class="kt">double</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">pow</span><span class="p">((</span><span class="kt">double</span><span class="p">)(</span><span class="n">radius</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">radius</span><span class="p">[</span><span class="n">j</span><span class="p">]),</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">-</span> <span class="n">pow</span><span class="p">((</span><span class="kt">double</span><span class="p">)</span><span class="n">abs</span><span class="p">(</span><span class="n">radius</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">radius</span><span class="p">[</span><span class="n">j</span><span class="p">]),</span> <span class="mf">2.0</span><span class="p">));</span>
-<span class="lineno">31</span>             <span class="n">map</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">map</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
-<span class="lineno">32</span>         <span class="p">}</span>
-<span class="lineno">33</span>     <span class="p">}</span>
-<span class="lineno">34</span>     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span><span class="p">;</span> <span class="n">i</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-<span class="lineno">35</span>         <span class="n">string</span> <span class="n">st</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
-<span class="lineno">36</span>         <span class="n">st</span> <span class="o">+=</span> <span class="p">(</span><span class="kt">char</span><span class="p">)</span><span class="n">i</span><span class="p">;</span>
-<span class="lineno">37</span>         <span class="n">dfs</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">,</span> <span class="n">st</span><span class="p">);</span>
-<span class="lineno">38</span>     <span class="p">}</span>
-<span class="lineno">39</span>     <span class="c1">//cout &lt;&lt; now &lt;&lt; endl;</span>
-<span class="lineno">40</span>     <span class="k">return</span> <span class="kt">double</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span> <span class="p">;</span>
-<span class="lineno">41</span> <span class="p">}</span>
-<span class="lineno">42</span> 
-<span class="lineno">43</span> <span class="kt">void</span> <span class="n">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">u</span><span class="p">,</span> <span class="kt">int</span> <span class="n">vi</span><span class="p">,</span> <span class="n">string</span> <span class="n">st</span><span class="p">)</span> <span class="p">{</span>
-<span class="lineno">44</span>     <span class="k">if</span><span class="p">(</span><span class="n">vi</span> <span class="o">==</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">len</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-<span class="lineno">45</span>         <span class="c1">//cout &lt;&lt; SZ(st) &lt;&lt; endl;</span>
-<span class="lineno">46</span>         <span class="kt">double</span> <span class="n">sum</span><span class="p">[</span><span class="mi">11</span><span class="p">];</span>
-<span class="lineno">47</span>         <span class="n">memset</span><span class="p">(</span><span class="n">sum</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">sum</span><span class="p">));</span>
-<span class="lineno">48</span>         <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">SZ</span><span class="p">(</span><span class="n">st</span><span class="p">);</span> <span class="n">i</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-<span class="lineno">49</span>             <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">i</span><span class="p">;</span> <span class="n">j</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-<span class="lineno">50</span>                 <span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">sum</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">map</span><span class="p">[(</span><span class="kt">int</span><span class="p">)</span><span class="n">st</span><span class="p">[</span><span class="n">i</span><span class="p">]][(</span><span class="kt">int</span><span class="p">)</span><span class="n">st</span><span class="p">[</span><span class="n">j</span><span class="p">]],</span> <span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-<span class="lineno">51</span>             <span class="p">}</span>
-<span class="lineno">52</span>         <span class="p">}</span>
-<span class="lineno">53</span>         <span class="n">ans</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">sum</span><span class="p">[</span><span class="n">len</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]);</span>
-<span class="lineno">54</span>         <span class="k">return</span><span class="p">;</span>
-<span class="lineno">55</span>     <span class="p">}</span>
-<span class="lineno">56</span>     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span><span class="p">;</span> <span class="n">i</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-<span class="lineno">57</span>         <span class="k">if</span><span class="p">((</span><span class="n">vi</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-<span class="lineno">58</span>             <span class="n">string</span> <span class="n">sttmp</span> <span class="o">=</span> <span class="n">st</span><span class="p">;</span>
-<span class="lineno">59</span>             <span class="n">sttmp</span> <span class="o">+=</span> <span class="p">(</span><span class="kt">char</span><span class="p">)</span><span class="n">i</span><span class="p">;</span>
-<span class="lineno">60</span>             <span class="n">dfs</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">vi</span> <span class="o">|</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">)),</span> <span class="n">sttmp</span><span class="p">);</span>
-<span class="lineno">61</span>         <span class="p">}</span>
-<span class="lineno">62</span>     <span class="p">}</span>
-<span class="lineno">63</span> <span class="p">}</span>
-<span class="lineno">64</span> 
-<span class="lineno">65</span> <span class="p">};</span>
-</code></pre></div>
-
-
-
 
     </section>
     </article>
