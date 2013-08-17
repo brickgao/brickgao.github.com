@@ -1,0 +1,30 @@
+title:            Slient
+description:      Brickgao's Blog
+url:              http://brickgao.com
+signoff:          Brickgao
+disqus_shortname: brickgaos
+facebook_appid:   # appid for like button, remove from /_includes/share.html if unwanted.
+google_analytics: # set tracking, remove from /javascripts/basic.js if unwanted.
+
+links:
+  - name:         About
+    url:          /about.html
+  - name:         Tags
+    url:          /tags.html
+  - name:         Blogroll
+    url:          /links.html
+  - name:         Home
+    url:          /
+  - name:         Rss
+    url:          /feed.xml
+  - name:         Twitter
+    url:          https://twitter.com/Brickgao
+    external:     true
+  - name:         GitHub
+    url:          http://github.com/brickgao
+    external:     true
+pygments:         true
+permalink:        /:year/:month/:day/:title.html
+markdown:         rdiscount
+rdiscount:
+  extensions:     [smart]
