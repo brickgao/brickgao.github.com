@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Simple Baiduyun与Whowakeup - 两个Node.js的小小尝试
+title: Simple Baiduyun与WhoWakeUp - 两个Node.js的小小尝试
 disqus: y
 date: 2013-09-27 20:54:28
 tags: [Node.js, MongoDB, Express]
