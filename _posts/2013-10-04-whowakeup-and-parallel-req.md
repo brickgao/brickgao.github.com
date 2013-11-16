@@ -6,7 +6,7 @@ date: 2013-10-04 17:30:37
 tags: [Node.js, MongoDB, Express]
 ---
 
-![禁忌「フォーオブアカインド」](/media/2013/09/Flandre_Scarlet.jpg)
+![禁忌「フォーオブアカインド」](/media/2013/10/Flandre_Scarlet.jpg)
 
 WhoWakeUp是我帮机油写的一个起床签到的小应用，用于微信平台。
 
