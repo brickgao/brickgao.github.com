@@ -28,7 +28,7 @@ webSocket 是 HTML5 开始提供的一种浏览器与服务器间进行全双工
 
 在服务端的`app.js`中，添加`var io = require('socket.io').listen(server);`，其中`server`是 `http.createServer(app).listen(app.get('post'))` 创建的服务器监听对象，然后再用 `io.sockets.on('connection', function() {})` 表示握手，后面的回调就写 websocket 的操作。
 
-这里介绍一下 socket.io 的两个具体用法，一个是`on`，是对接受的信息的处理，一个是`emit`，是对消息的广播。具体的用法请参见[ socket.io 的文档](https://github.com/learnboost/socket.io/tree/master "socket.io 的文档")。
+这里介绍一下 socket.io 的两个具体方法，一个是`on`，是对接受的信息的处理，一个是`emit`，是对消息的广播。具体的用法请参见[ socket.io 的文档](https://github.com/learnboost/socket.io/tree/master "socket.io 的文档")。
 
 当我们执行`node app.js`之后可以看到
 
