@@ -11,3 +11,4 @@ disqus: y
 [伝説の所](http://www.legendt.me/ "Legendt")  
 [Hexchain Tong](https://hexchain.org/ "hexchain")  
 [Acgtyrant](http://acgtyrant.com/ "Acgtyrant")  
+[Sanaeの空想庭园](http://blog.kochiya.me/ "AprocySanae")  
