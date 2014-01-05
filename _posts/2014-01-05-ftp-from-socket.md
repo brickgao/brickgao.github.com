@@ -113,7 +113,7 @@ LIST 是列出目录下所有文件信息的命令，发送时发送`LIST\r\n`�
 
 至于具体完成的代码，可以参见[这里](https://github.com/brickgao/SimpleFTP)。
 
-拓展阅读：
+拓展阅读：  
 [RFC 0959](http://tools.ietf.org/html/rfc0959) - FTP 的标准  
 [使用 Socket 通信实现 FTP 客户端程序](http://www.ibm.com/developerworks/cn/linux/l-cn-socketftp/) - IBM developerWorks 中国
 
