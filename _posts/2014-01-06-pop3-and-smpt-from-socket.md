@@ -150,7 +150,7 @@ DATA 命令的格式为`'DATA\r\n'`，之后接到 354 状态码就可以发送�
 
 `SMTP` 和 `POP3` 在 Python 中也有现成的模块，可以去看看来提升一下自己代码的美观。
 
-然后我默默地继续去复习软件安全 (:з」∠)_。
+想看源码的[戳我](https://github.com/brickgao/SimpleMail)，然后我默默地继续去复习软件安全 (:з」∠)_。
 
 拓展阅读：  
 [SMTP AUTH](http://www.fehcom.de/qmail/smtpauth.html)  
