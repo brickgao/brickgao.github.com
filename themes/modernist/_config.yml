@@ -1,0 +1,19 @@
+menu:
+  Home: /
+  Archives: /archives
+  About: /about
+  Links: /links
+rss: /feed.xml
+
+archive_date_format: MMM DD
+fancybox: true
+
+duoshuo_shortname:
+
+google_analytics:
+favicon: /favicon.ico
+
+widgets:
+- category
+- tagcloud
+- recent_posts

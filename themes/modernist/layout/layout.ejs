@@ -1,0 +1,23 @@
+<%- partial('_partial/head') %>
+<body>
+  <div class="wrapper">
+    <%- partial('_partial/header') %>
+    <div class="content"><%- body %></div>
+  </div>
+  <div class="widget-wrapper">
+    <%- partial('_partial/sidebar') %>
+  </div>
+  <footer id="footer"><%- partial('_partial/footer') %></footer>
+  <%- partial('_partial/after-footer') %>
+</body>
+<script type='text/javascript'>
+(function() {
+    var c = document.createElement('script'); 
+    c.type = 'text/javascript';
+    c.async = true;
+    c.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'www.clicki.cn/boot/48547';
+    var h = document.getElementsByTagName('script')[0];
+    h.parentNode.insertBefore(c, h);
+})();
+</script>
+</html>
