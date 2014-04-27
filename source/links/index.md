@@ -16,3 +16,7 @@ title: Links
 [Acgtyrant](http://acgtyrant.com/ "Acgtyrant")
 
 [Sanaeの空想庭园](http://blog.kochiya.me/ "AprocySanae")
+
+[Eyelids](http://hi.baidu.com/eyelidstl "Eyelids")
+
+[Yuyuko's Blog](http://yuyuko.logdown.com/ "Yuyuko")
