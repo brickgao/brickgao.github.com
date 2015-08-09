@@ -7,31 +7,25 @@ ID
 
 City
 
-> Wuhan | Xian
+> Suzhou | Xian
 
 Tags
 
-> Wuhan University，2011年入学，信息安全专业，预计2015年毕业
+> 男
 
-> Nodejs，Python，C++
+> INTJ
 
-> Vimer
+> ACGMN
 
-> Linuxer，目前从Ubuntu迁到了Archlinux
+> 会写 Python 和 C++，会写一点点 JavaScript
 
-> 伪geek，伪技术宅（就是好装逼，恩
+> 本科武汉大学（2011 ~ 2015），研究生中国科技大学（2015 ~ 现 在），专业一直是信息安全
 
-> 做了两年ACM，依然渣渣，现在退役
+> 本科时和机油打过两年的 ACM-ICPC，不过许久不练基本退化得差不多了
 
-> 喜欢80%以下的键盘，现在用noppoo青轴
+> 喜欢游戏，然而喜欢看别人打游戏要比自己打多一些
 
-> 伪文青，爱看书，持有kpw2
-
-> 有块儿数位板，不过不经常画画
-
-> 路痴，出门需要Google Maps
-
-> ACGMN，主要是AMN
+> 喜欢看书，看随笔和科幻会多一些
 
 Connect
 
@@ -49,9 +43,11 @@ Find me
 
 > Steam: [Brickgao](http://steamcommunity.com/id/brickgao "Steam")
 
-> Gplus: [+Xiongzhi Gao](https://plus.google.com/101935445016350272231 "Gplus")
+> PSN: [Brickgao](https://www.playstation.com/en-us/my/public-trophies/?onlineId=Brickgao) 
 
 > Zhihu: [Brickgao](http://www.zhihu.com/people/brickgao "Zhihu")
 
 > Weibo: [@Brickgao](http://weibo.com/brickgao "Weibo")
+
+Last Update at 08/09/2015
 
