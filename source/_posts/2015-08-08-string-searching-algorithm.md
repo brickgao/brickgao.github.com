@@ -83,9 +83,12 @@ while i < n and j < m:
         i += 1
         j += 1
     else:
-        j = next[j] if next[j] >= 0 else 0
-if j == m:
-    # do something if match
+        if next[j] >= 0:
+            j = next[j]
+        else:
+            j, i = 0, i + 1
+        if j == m:
+            # do something if match
 ```
 
 #### BM 算法（Boyer–Moore Algorithm）
@@ -205,11 +208,11 @@ for (int i = 0; i <= n; ++ i) {
 
 多模匹配是用多个模式串来匹配一个输入串，但并不是简单的单模匹配的叠加，多个模式串直接可能存在某些匹配联系，可以利用他们之间的匹配关系进一步加速匹配。
 
-#### AC 自动机（Aho–Corasick algorithm）
+#### AC 自动机（Aho–Corasick Algorithm）
 
 AC 自动机和 KMP 的基本思想一致，在不匹配时，模式串上的指针不会直接跳到最初，也是和 KMP 思想一样寻找上一个能匹配的状态。
 
-AC 自动机的预处理复杂度位 `O(m)`，搜索复杂度位 `O(n + m + z)`，z 代表模式串在输入串中出现的次数。
+AC 自动机的预处理复杂度为 `O(m)`，搜索复杂度为 `O(n + m + z)`，z 代表模式串在输入串中出现的次数。
 
 AC 自动机的算法主要分为三个步骤：构造一个 Trie 树、构造失败指针和进行匹配。
 
