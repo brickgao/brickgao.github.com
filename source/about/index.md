@@ -17,7 +17,9 @@ Tags
 
 > ACGMN
 
-> 会写 Python 和 C++，会写一点点 JavaScript
+> Arch Linux
+
+> 会写 Python 和 C++，以及一点点 JavaScript
 
 > 本科武汉大学（2011 ~ 2015），研究生中国科技大学（2015 ~ 现 在），专业一直是信息安全
 
