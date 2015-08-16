@@ -193,8 +193,8 @@ for (int i = 0; i <= CHAR_MAX; ++ i)
 for (int i = 0; i < m; ++ i)
 	pattern_mask[s2[i]] &= ~(1UL << i);
 
-for (int i = 0; i <= n; ++ i) {
-	tmp |= pattern_mask[s2[i]];
+for (int i = 0; i < n; ++ i) {
+	tmp |= pattern_mask[s1[i]];
 	tmp <<= 1
 	if (0 == (tmp & (1UL << m)))
 		// do something if match
