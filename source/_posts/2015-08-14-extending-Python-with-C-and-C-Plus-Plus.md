@@ -17,7 +17,7 @@ Python 因为其是一门解释性语言和动态类型的原因，在计算密�
 
 <!-- more -->
 
-用 C/C++ 对 Python 拓展的主流方式一共有四种，使用 Python 的 ctypes 模块，使用 Python CAPI，使用 Cython 以及使用 SWIG。
+用 C/C++ 对 Python 拓展的主流方式一共有四种，使用 Python 的 ctypes 模块、使用 Python CAPI、使用 Cython 以及使用 SWIG。
 
 ### 直接使用 C/C++ 的动态链接库，使用 Python 的 ctypes 模块
 
@@ -173,7 +173,7 @@ cdef foo(x):
     return v
 ```
 
-Cython 除了提供 CAPI 之外，还提供了大部分的封装好的模块和函数，像是 C++ 的 STL 等等，而对于 Unicode 或者 Python 的异常机制，Cpython 会帮助你自动翻译成 C/C++，这样来看 Cython 的易用性是相当的好的。
+Cython 除了提供 CAPI 之外，还提供了大部分的封装好的模块和函数，像是 C++ 的 STL 等等，而对于 Unicode 或者 Python 的异常机制，Cython 会帮助你自动翻译成 C/C++，这样来看 Cython 的易用性是相当的好的。
 
 对于运行速度来说，由于是 Cython 做了翻译相关的工作，粒度相对较粗，所以无法做一些粒度更小的优化。
 
