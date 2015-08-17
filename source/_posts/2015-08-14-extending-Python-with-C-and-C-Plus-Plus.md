@@ -21,7 +21,7 @@ Python 因为其是一门解释性语言和动态类型的原因，在计算密�
 
 ### 直接使用 C/C++ 的动态链接库，使用 Python 的 ctypes 模块
 
-ctypes 是 Python 官方提供的 FFI 模块，适用于提供了提供了动态链接库的 C/C++ 模块。
+ctypes 是 Python 官方提供的 FFI 模块，适用于提供了动态链接库的 C/C++ 模块。
 
 例如：
 
