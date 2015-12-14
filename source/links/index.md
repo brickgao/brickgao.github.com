@@ -3,6 +3,8 @@ title: Links
 
 [算法学社](http://www.cppblog.com/hanfei19910905/ "figo")
 
+[Hime](http://www.himehime.us/ "Hime")
+
 [精神病院42号的日记](http://syco.mad4a.me/ "mad4alcohol")
 
 [余光](http://shinelee.info/ "余光")
