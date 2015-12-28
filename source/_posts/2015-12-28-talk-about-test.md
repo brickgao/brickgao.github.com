@@ -1,11 +1,13 @@
 title: 浅谈测试
-date: 2015-12-27 23:47:00
+date: 2015-12-28 15:32:00
 tags:
 - Python
 - 测试
 categories:
 - Develop
 ---
+
+![You just keep on trying till you run out of cake.](/media/2015/12/portal.png)
 
 这篇文章是写了一段时间测试之后的简单总结，主要讨论在 Python 语言环境下的功能测试和单元测试。
 
