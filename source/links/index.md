@@ -19,4 +19,4 @@ title: Links
 
 [Figo](http://www.cppblog.com/hanfei19910905/ "Figo")
 
-[Wicast](http://www.cppblog.com/hanfei19910905/ "Wicast")
+[Wicast](http://tnt.wicast.tk/ "Wicast")
