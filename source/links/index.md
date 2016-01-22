@@ -9,14 +9,16 @@ title: Links
 
 [ExiaHan](http://exiahan.com/ "ExiaHan 前辈")
 
+[Figo](http://www.cppblog.com/hanfei19910905/ "Figo")
+
 [Hime](http://www.himehime.us/ "Hime 酱")
 
 [LegendTang](http://www.legendt.me/ "Legendt")
 
+[Qwert42](http://qwert42.org/ "杭神（ry")
+
 [Ricter](http://www.ricter.me/ "Ricter")
 
 [Xiami](http://f2light.com/ "Xiami")
-
-[Figo](http://www.cppblog.com/hanfei19910905/ "Figo")
 
 [Wicast](http://tnt.wicast.tk/ "Wicast")
