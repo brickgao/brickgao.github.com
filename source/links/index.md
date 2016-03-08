@@ -13,7 +13,7 @@ title: Links
 
 [Hime](http://www.himehime.us/ "Hime 酱")
 
-[LegendTang](http://www.legendt.me/ "Legendt")
+[LegendTang](http://legendt.com/ "Legendt")
 
 [Qwert42](http://qwert42.org/ "杭神（ry")
 
