@@ -10,7 +10,6 @@ fancybox: true
 
 duoshuo_shortname:
 
-google_analytics:
 favicon: /favicon.ico
 
 widgets:
