@@ -276,5 +276,3 @@ def test():
 6. http://www.voidspace.org.uk/python/mock/compare.html#mocking-the-builtin-open-used-as-a-context-manager 
 7. http://stackoverflow.com/questions/18285947/how-to-use-a-test-tornado-server-handler-that-authenticates-a-user-via-a-secure
 8. https://pythonhosted.org/testfixtures/logging.html
-
-
