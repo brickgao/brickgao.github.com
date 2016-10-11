@@ -1,4 +1,4 @@
-title: 利用 git hook 在 git commit 之前 cpplint 自动检查代码
+title: 利用 git hook 在 git commit 之前用 cpplint 自动检查代码
 date: 2016-10-11 11:50:00
 tags:
 - C++
@@ -6,7 +6,7 @@ categories:
 - Develop
 ---
 
-最近主要在写 C++，为了防止自己手滑，需要一个自动化检查代码的方法。而由于没有 CI 可以用，姑且采用了利用 Git Hook 在 `git commit` 之前检查一边代码的方案。
+最近主要在写 C++，为了防止自己手滑，需要一个自动化检查代码的方法。而由于没有 CI 可以用，姑且采用了利用 Git Hook 在 `git commit` 之前检查一遍代码的方案。
 
 <!-- more -->
 
