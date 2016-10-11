@@ -1,5 +1,5 @@
 title: 利用 git hook 在 git commit 之前用 cpplint 自动检查代码
-date: 2016-10-11 11:50:00
+date: 2016-10-11 23:50:00
 tags:
 - C++
 categories:
