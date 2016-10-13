@@ -67,10 +67,11 @@ exec 1>&2
 
 cpplint=cpplint
 sum=0
+filters='-build/include_order,-build/namespaces,-legal/copyright,-runtime/references'
         
 # for cpp
 for file in $(git diff-index --name-status $against -- | grep -E '\.[ch](pp)?$' | awk '{print $2}'); do
-    $cpplint $file
+    $cpplint --filter=$filters $file
     sum=$(expr ${sum} + $?)
 done
     
