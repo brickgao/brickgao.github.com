@@ -7,6 +7,8 @@ title: Links
 
 [Cee](http://blog.cee.moe/ "Cee")
 
+[Danlei](https://danaive.github.io/ "蛋蛋哥！")
+
 [ExiaHan](http://exiahan.com/ "ExiaHan 前辈")
 
 [Figo](http://www.cppblog.com/hanfei19910905/ "Figo")
