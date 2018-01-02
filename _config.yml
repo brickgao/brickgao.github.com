@@ -83,6 +83,12 @@ google_analytics: UA-74874498-2
 per_page: 10
 pagination_dir: page
 
+# Miscellaneous
+twitter: brickgao
+google_plus:
+fb_admins:
+fb_app_id:
+
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
@@ -96,7 +102,7 @@ feed:
   hub:
   content:
   content_limit: 140
-  content_limit_delim: ' '  
+  content_limit_delim: ' ' 
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
